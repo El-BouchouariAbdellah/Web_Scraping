@@ -1,0 +1,661 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"); 
+.introduction {
+    display: flex;
+    flex-direction: row;
+    margin: 62px;
+    background-color: black;
+    border-radius: 31px;
+}
+
+.introduction img {
+    width: 50%;
+    border-radius: 50%;
+}
+
+.what {
+    display: flex;
+    flex-direction: row;
+    margin: 30px;
+    border-bottom: 1px solid gray;
+}
+.what > div {
+    gap: 20px;
+}
+
+.what img {
+    overflow: hidden;
+    width: 100%;
+}
+
+.what p {
+    font-size: 1.28em;
+    width: 67%;
+    letter-spacing: 1.5px;
+    margin: auto;
+    text-align: left;
+}
+
+.use {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 30px;
+    border-bottom: 1px solid gray;
+}
+
+.use img {
+    overflow: hidden;
+    width: 100%;
+}
+
+.use p {
+    font-size: 1.28em;
+    letter-spacing: 1.5px;
+    width: 67%;
+    margin: auto;
+    text-align: left;
+}
+
+.ressources {
+    display: flex;
+}
+
+.ressources img {
+    overflow: hidden;
+    width: 100%;
+}
+
+.ressources p {
+    font-size: 1.28em;
+    letter-spacing: 1.5px;
+    width: 67%;
+    margin: auto;
+    text-align: left;
+}
+
+.introduction > div > h1 {
+    flex-direction: column;
+    color: rgb(0, 191, 255);
+    font-size: 2em;
+    text-align: center;
+    margin: 30px;
+    padding: 30px;
+}
+
+.introduction p {
+    color: rgb(224, 224, 224);
+    font-size: 1.3em;
+    text-align: center;
+    padding: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+section {
+    padding: 20px;
+}
+
+.title {
+    color: rgb(255, 215, 0);
+    margin: 30px;
+    font-size: 1.8em;
+}
+
+section p {
+    color: rgb(224, 224, 224);
+}
+
+section p a {
+    color: rgb(0, 191, 255);
+    text-decoration: underline;
+}
+
+/**  ------ What's Style ----- **/
+.definition{
+    display: flex;
+    flex-direction: column;
+    margin: 62px;
+    background-color: black;
+    border-radius: 31px;
+}
+
+.bo{
+    border-bottom: 1px white solid;
+    /* margin: 10px; */
+    width: 70%;
+    display: block;
+    margin: 0 auto;
+}
+.definition h3{
+    font-size: 2em;
+    margin: 10px 25px;
+}
+.definition video{
+    border-bottom-right-radius: 30px;
+}
+.definition p{
+    margin: 20px 30px;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.timeline {
+    position: relative;
+    max-width: 75%;
+    margin: 40px auto;
+}
+
+.contain {
+    padding: 10px 50px;
+    position: relative;
+    width: 50%;
+    color: black;
+    animation: 1s linear 0s 1 normal forwards running movedown;
+    opacity: 0;
+}
+
+@keyframes movedown {
+    0% {
+        opacity: 1;
+        transform: translateY(-30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+.text-box {
+    padding: 20px 30px;
+    background: white;
+    position: relative;
+    border-radius: 6px;
+}
+
+.contain-left {
+    left: 0px;
+}
+
+.contain-right {
+    left: 50%;
+}
+
+.contain img {
+    position: absolute;
+    width: 40px;
+    border-radius: 50%;
+    right: -3.9%;
+    top: 60px;
+    z-index: 10;
+}
+
+.contain-right img {
+    left: -3.8%;
+}
+
+.timeline::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 100%;
+    background: white;
+    top: 0px;
+    left: 50%;
+    margin-left: -3px;
+    z-index: -1;
+    animation: 6s linear 0s 1 normal forwards running moveline;
+}
+
+@keyframes moveline {
+    0% {
+        height: 0px;
+    }
+
+    100% {
+        height: 100%;
+    }
+}
+
+.text-box h2 {
+    font-weight: 600;
+}
+
+.text-box .year {
+    display: inline-block;
+    margin: 15px 0px;
+    color: #00bfff;
+    font-weight: 900;
+}
+
+.contain-left-arrow {
+    height: 0px;
+    width: 0px;
+    position: absolute;
+    top: 54px;
+    z-index: 1;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid white;
+    right: -15px;
+}
+
+.contain-right-arrow {
+    height: 0px;
+    width: 0px;
+    position: absolute;
+    top: 54px;
+    z-index: 1;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 15px solid white;
+    left: -15px;
+}
+
+.contain:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.contain:nth-child(2) {
+    animation-delay: 2s;
+}
+
+.contain:nth-child(3) {
+    animation-delay: 3s;
+}
+
+.contain:nth-child(4) {
+    animation-delay: 4s;
+}
+
+.contain:nth-child(5) {
+    animation-delay: 5s;
+}
+
+.contain:nth-child(6) {
+    animation-delay: 6s;
+}
+
+.app {
+    background-color: white;
+    width: 90%;
+    max-width: 600px;
+    margin: 100px auto;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.test {
+    color: black;
+}
+
+.app h1 {
+    font-size: 25px;
+    color: rgb(0, 30, 77);
+    font-weight: 600;
+    border-bottom: 1px solid rgb(51, 51, 51);
+    padding-bottom: 30px;
+}
+
+.quiz {
+    padding: 20px 0px;
+}
+
+.quiz h2 {
+    font-size: 18px;
+    color: rgb(0, 30, 77);
+    font-weight: 600;
+}
+
+.btn {
+    background: white;
+    color: rgb(34, 34, 34);
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid rgb(34, 34, 34);
+    padding: 10px;
+    margin: 10px 0px;
+    text-align: left;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.btn:hover:not([disabled]) {
+    background: rgb(34, 34, 34);
+    color: white;
+}
+
+.btn:disabled {
+    cursor: no-drop;
+}
+
+#next-btn {
+    background: rgb(0, 30, 77);
+    color: white;
+    font-weight: 500;
+    width: 150px;
+    border: 0px;
+    padding: 10px;
+    margin: 20px auto 0px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: none;
+}
+
+.correct {
+    background-color: rgb(154, 234, 188);
+}
+
+.incorrect {
+    background-color: rgb(255, 147, 147);
+}
+
+.container2 {
+    width: 100%;
+}
+
+.blog {
+    width: 85%;
+    margin: 20px auto;
+}
+
+.blog .title1 {
+    width: 60%;
+    text-align: center;
+    margin: 50px auto auto;
+    font-size: 40px;
+    color: rgb(55, 92, 166);
+    text-transform: uppercase;
+}
+
+.articles {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 50px;
+    margin: 25px auto;
+}
+
+.articles .article {
+    width: 100%;
+    position: relative;
+}
+
+.img-section {
+    width: 100%;
+    height: auto;
+}
+
+.content {
+    padding: 15px 20px;
+}
+
+.content h4 {
+    font-size: 28px;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.content p {
+    color: #cdc7bb;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.content a {
+    text-decoration: none;
+    color: white;
+    margin-top: 12px;
+    display: inline-block;
+    background: rgb(58, 112, 106);
+    padding: 8px 15px;
+}
+
+.container3 {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 25px;
+    width: 100%;
+}
+
+.box {
+    width: 325px;
+    height: 476px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+    margin: 20px;
+}
+
+.box img {
+    width: 100%;
+    height: auto;
+}
+
+.box-content {
+    padding: 14px;
+    height: 275px;
+}
+
+.box-content h3 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: black;
+    text-align: center;
+}
+
+.box-content p {
+    color: rgb(102, 102, 102);
+    font-size: 15px;
+    line-height: 1.3;
+    text-align: left;
+}
+
+.box-content a {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: rgb(51, 51, 51);
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 16px;
+    color: white;
+}
+
+.box-content p span {
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+.about {
+    width: 100%;
+    padding: 78px 0px;
+}
+
+.about img {
+    height: auto;
+    width: 420px;
+}
+
+.about-text {
+    width: 550px;
+}
+
+.main {
+    width: 1130px;
+    max-width: 95%;
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.about-text h1 {
+    color: white;
+    font-size: 80px;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+.about-text h5 {
+    color: white;
+    font-size: 25px;
+    text-transform: capitalize;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+}
+
+.about-text h6 {
+    color: rgb(0, 191, 255);
+    font-size: 20px;
+    text-transform: capitalize;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+}
+
+.about-text p {
+    color: rgba(255, 204, 255, 0.8);
+    letter-spacing: 1px;
+    line-height: 28px;
+    font-size: 18px;
+    margin-bottom: 45px;
+}
+
+.about-text button {
+    background-color: rgb(0, 191, 255);
+    color: white;
+    border: 2px solid transparent;
+    font-weight: bold;
+    padding: 13px 30px;
+    border-radius: 30px;
+    transition: all 0.4s ease 0s;
+    font-size: 1.4em;
+}
+
+.about-text button:hover {
+    background: transparent;
+    border: 2px solid;
+    cursor: pointer;
+    color: rgb(0, 191, 255);
+}
+
+.faq-body {
+    background-color: rgb(28, 28, 28);
+    color: white;
+}
+
+.faq-body section {
+    min-height: 100vh;
+    width: 80%;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.faq-title {
+    font-size: 3rem;
+    margin: 2rem 0rem;
+}
+
+.faq {
+    max-width: 700px;
+    margin-top: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid white;
+    cursor: pointer;
+}
+
+.question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.question h3 {
+    font-size: 1.8rem;
+    text-align: left;
+    margin-bottom: 19px;
+}
+
+.question svg {
+    height: 25px;
+    transition: transform 0.5s ease-in 0s;
+}
+
+.answer {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 1.5s ease 0s;
+}
+
+.answer p {
+    padding-top: 1rem;
+    line-height: 1.6;
+    font-size: 1.4rem;
+}
+
+.faq.active .answer {
+    max-height: 300px;
+    text-align: left;
+    font-size: 1.2em;
+}
+
+.faq.active svg {
+    transform: rotate(180deg);
+}
+
+/** Whats style**/
+.sec1{
+    position: relative;
+    overflow: hidden;
+    min-height: 30vh;
+    margin-top: 48px;
+}
+.vid-bg{
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.sec1 h1{
+    text-align: center;
+    padding: 30px;
+    margin: 20px;
+}
+
+/* ressources style */ 
+
+.heading{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2.6em;
+    margin-top: 30px;
+}
+
+.resources-body main{
+    margin-bottom: 40px;
+}
+#timeline{
+    font-size: 2.5em;
+    margin: 35px 20px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.text-box :nth-child(3){
+    /* font-size: 15px; */
+    text-align: left;
+}
+
+.about-body main{
+    margin-bottom: 19px;
+}

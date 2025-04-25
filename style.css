@@ -1,0 +1,160 @@
+
+/* Reset and global styles */
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: "Quicksand",sans-serif;
+
+}
+
+body {
+    background-color: #1c1c1c; 
+    color: #E0E0E0; 
+    text-align: justify;
+
+}
+
+/* Header styles */
+.primary_header {
+    display: flex;
+    position: sticky;
+    top: 0;
+    flex-direction: column;
+    background-color: #000000; 
+    padding: 10px;
+    transition: background-color 500ms, flex-direction 500ms, padding 500ms;
+    z-index: 10;
+}
+
+.primary_header > a {
+    align-self: center;
+    transition: width 500ms, height 500ms;
+}
+
+.primary_header > a > img {
+    width: 84px;
+    height: 84px;
+    transition: width 500ms, height 500ms;
+}
+
+.primary_header.sticking > a > img {
+    width: 25px;
+    height: 25px;
+}
+
+.primary_header.sticking {
+    display: flex;
+    flex-direction: row;
+    background-color: #121212; 
+    padding: 10px 20px;
+    box-shadow: 10px 0px 5px whitesmoke;
+    z-index: 10;
+}
+
+.primary_header.sticking > nav {
+    width: 100%;
+}
+
+/* Navigation styles */
+.primary_header nav ul {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0px;
+}
+
+.primary_header nav ul li a {
+    color: #00BFFF; 
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.primary_header nav ul li:nth-child() a{
+    text-transform: uppercase;
+}
+
+.primary_header nav ul li a:hover {
+    color: #ffd700; 
+}
+
+
+
+/* Footer styles */
+
+footer{
+    background-color: #111;
+    padding: 34px;
+}
+.footer-container{
+    width: 100%;
+    padding: 30px 20px 20px;
+}
+.social-icons{
+    display: flex;
+    justify-content: center;
+}
+.social-icons a{
+    padding: 10px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 50%;
+}
+.social-icons a i{
+    font-size: 2em;
+    color: black;
+    opacity: 0.9;
+}
+
+/*Hover effect on social media*/
+
+.social-icons a:hover{
+    background-color: #111;
+    transition: 0.5s;
+}
+
+.social-icons a:hover i{
+    color: white;
+    transition: 0.5s;
+}
+
+/*End Hover for icons */
+
+.footer-nav{
+    margin: 30px 0;
+}
+
+.footer-nav ul{
+    display: flex;
+    justify-content: center;
+}
+.footer-nav ul li a{
+    color: white;
+    margin: 20px;
+    font-size: 1.3em;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+.footer-nav ul li a:hover{
+    opacity: 1;
+}
+
+.footer-bottom{
+    background-color: black;
+    padding: 20px;
+    text-align: center ;
+}
+.author{
+    opacity: 0.7;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin: 0px 5px;
+}
+iframe{
+    width: 100%;
+    padding: 20px;
+    height: 300px;
+}
