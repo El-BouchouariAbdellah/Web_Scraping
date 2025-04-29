@@ -1,0 +1,4 @@
+1 - When navigating from the grade page to the lessons page, the lessons page does not contain any lessons. However, it still has the same HTML structure as other pages that do contain lessons. As a result, the program will run, but it will not download any lesson.
+2 - On the grade page (the page that lists the subjects), when I select a subject, it does not take me to the second page (the default lessons page) as expected. Instead, it skips directly to the third page, which contains the list of lessons and their download links (for example, "Français Niveau 6 Primaire").
+3 - English is not included in the curriculum of the third year of middle school.
+

@@ -1,13 +1,13 @@
 from bs4 import BeautifulSoup
 import requests
-import urllib.parse
-import time
+import urllib.parse #decode Url - encoded charachters 
+import time # used for adding delays between requests
 
 html_text = requests.get('https://moutamadris.ma/%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3-%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A/').text
 soup = BeautifulSoup(html_text, 'lxml')
-subjects = soup.find_all('li', 'mada')
+subjects = soup.find_all('li', 'mada') # subjects is a ResultSet (list)
 
-for index, subject in enumerate(subjects):
+for index, subject in enumerate(subjects): # indexing is usueful for debugging (track postion : unique file names for pdf , know in which tag we had an error)
     try:
         print(f"Processing subject {index + 1}/{len(subjects)}")
         lien = subject.find('a')
