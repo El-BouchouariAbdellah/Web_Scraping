@@ -1,66 +1,65 @@
 from bs4 import BeautifulSoup
 import requests
-import urllib.parse #decode Url - encoded charachters 
-import time # used for adding delays between requests
+import time
 
-html_text = requests.get('https://moutamadris.ma/%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3-%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A/').text
-soup = BeautifulSoup(html_text, 'lxml')
-subjects = soup.find_all('li', 'mada') # subjects is a ResultSet (list)
+main_page_url = 'https://moutamadris.ma/%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3-%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A/'
+main_page_html = requests.get(main_page_url).text
+main_page_soup = BeautifulSoup(main_page_html, 'lxml')
+subject_elements = main_page_soup.find_all('li', 'mada')
 
-for index, subject in enumerate(subjects): # indexing is usueful for debugging (track postion : unique file names for pdf , know in which tag we had an error)
+for subject_index, subject_element in enumerate(subject_elements):
     try:
-        print(f"Processing subject {index + 1}/{len(subjects)}")
-        lien = subject.find('a')
-        if not lien:
+        print(f"Processing subject {subject_index + 1}/{len(subject_elements)}")
+        subject_link_element = subject_element.find('a')
+        if not subject_link_element:
             print("No link found for this subject, skipping...")
             continue
             
-        url = lien['href']
+        subject_page_url = subject_link_element['href']
         try:
-            cours_html = requests.get(url).text
-            soup1 = BeautifulSoup(cours_html, 'lxml')
-            mat = soup1.find('li', 'medium-8 column')
+            subject_page_html = requests.get(subject_page_url).text
+            subject_page_soup  = BeautifulSoup(subject_page_html, 'lxml')
+            content_container = subject_page_soup .find('li', 'medium-8 column')
             
-            if not mat:
-                print("Could not find 'medium-8 column' element, skipping this subject...")
+            if not content_container:
+                print("Could not find content container element, skipping this subject...")
                 continue
                 
-            down_link = mat.find('a')
-            if not down_link:
-                print("No download link found, skipping...")
+            content_link_element = content_container.find('a')
+            if not content_link_element:
+                print("No content link found, skipping...")
                 continue
                 
-            down_pg_link = down_link['href']
+            content_page_url = content_link_element['href']
             
             try:
-                edu_html = requests.get(down_pg_link).text
-                soup2 = BeautifulSoup(edu_html, 'lxml')
-                file = soup2.find('div', class_="entry-content")
+                content_page_html = requests.get(content_page_url).text
+                content_page_soup = BeautifulSoup(content_page_html, 'lxml')
+                article_content = content_page_soup.find('div', class_="entry-content")
                 
-                if not file:
-                    print("No entry-content div found, skipping...")
+                
+                if not article_content:
+                    print("No article content found, skipping...")
                     continue
                     
-                cours = file.find('a')
-                if not cours:
+                download_link_element = article_content.find('a')
+                if not download_link_element:
                     print("No download link found in entry content, skipping...")
                     continue
                     
-                link = cours['href']
-                print(f"Found download link: {link}")
+                pdf_download_url = download_link_element['href']
+                print(f"Found download link: {pdf_download_url}")
                 
                 try:
-                    download = requests.get(link)
-                    encoded_filename = link.split('/')[-1]
-                    decoded_filename = urllib.parse.unquote(encoded_filename)
+                    pdf_response = requests.get(pdf_download_url)
                     
-                    # Create a safe filename
-                    safe_filename = f"file_{index + 1}.pdf"
+                    # Use simple numbered filenames
+                    pdf_filename = f"file_{subject_index + 1}.pdf"
                     
                     try:
-                        with open(safe_filename, 'wb') as f:
-                            f.write(download.content)
-                        print(f"File downloaded: {safe_filename}")
+                        with open(pdf_filename, 'wb') as f:
+                            f.write(pdf_filename.content)
+                        print(f"File downloaded: {pdf_filename}")
                     except Exception as e:
                         print(f"Error saving file: {e}, skipping...")
                         
@@ -76,3 +75,5 @@ for index, subject in enumerate(subjects): # indexing is usueful for debugging (
         
     except Exception as e:
         print(f"General error processing subject: {e}, moving to next subject...")
+
+print("Scraping completed!")
