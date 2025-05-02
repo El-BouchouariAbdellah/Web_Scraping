@@ -3,7 +3,7 @@ import requests
 import time
 import os
 
-main_page_url = 'https://moutamadris.ma/%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3-%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A/'
+main_page_url = 'https://moutamadris.ma/%d8%a7%d9%84%d8%a7%d9%88%d9%84-%d8%a7%d8%a8%d8%aa%d8%af%d8%a7%d8%a6%d9%8a/'
 main_page_html = requests.get(main_page_url).text
 main_page_soup = BeautifulSoup(main_page_html, 'lxml')
 subject_elements = main_page_soup.find_all('li', 'mada')
@@ -37,6 +37,12 @@ for subject_index, subject_element in enumerate(subject_elements):
         try:
             subject_page_html = requests.get(subject_page_url).text
             subject_page_soup = BeautifulSoup(subject_page_html, 'lxml')
+            
+            # Check for "mawad" class - if found, skip this subject
+            mawad_element = subject_page_soup.find(class_="mawad")
+            if mawad_element:
+                print(f"⚠️ This subject doesn't have any lessons on this website, skipping to next subject...")
+                continue
             
             # Find all elements with class "medium-8 column"
             contents_containers = subject_page_soup.find_all('li', 'medium-8 column')
@@ -96,6 +102,13 @@ for subject_index, subject_element in enumerate(subject_elements):
                 try:
                     content_page_html = requests.get(content_page_url).text
                     content_page_soup = BeautifulSoup(content_page_html, 'lxml')
+                    
+                    # Check for "mawad" class in the content page
+                    mawad_element = content_page_soup.find(class_="mawad")
+                    if mawad_element:
+                        print(f"⚠️ This subject doesn't have any lessons on this website, skipping to next subject...")
+                        break  # Break out of the container loop and move to next subject
+                    
                     article_content = content_page_soup.find('div', class_="entry-content")
                 
                     if not article_content:
