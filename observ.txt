@@ -1,0 +1,45 @@
+<li class="medium-6 column">
+
+
+##### Begining  grade_link_element
+<a
+
+## grade page url
+href="https://moutamadris.ma/%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A%D8%A9-%D8%A8%D8%A7%D9%83%D8%A7%D9%84%D9%88%D8%B1%D9%8A%D8%A7/"
+
+
+>
+الثانية باك
+</a>
+##### Ending  grade_link_element
+
+
+</li>
+
+
+
+<li class="mada"><img alt="" class="math" decoding="async" height="21" src="https://moutamadris.ma/wp-content/uploads/2024/07/maths.webp" width="21"/>
+
+subject_link_element :
+<a 
+
+href="https://moutamadris.ma/%d8%a7%d9%84%d8%b1%d9%8a%d8%a7%d8%b6%d9%8a%d8%a7%d8%aa-%d8%a7%d9%84%d8%ab%d8%a7%d9%86%d9%8a%d8%a9-%d8%a8%d8%a7%d9%83/"
+
+>
+الرياضيات
+</a>
+
+
+
+</li>
+
+
+
+<li class="medium-8 column">
+
+<a href="https://moutamadris.ma/%d8%b3%d9%88%d8%b1%d8%a9-%d9%8a%d8%b3-%d8%a7%d9%84%d8%ab%d8%a7%d9%86%d9%8a%d8%a9-%d8%a8%d8%a7%d9%83/">
+    <div class="num-count">1</div>
+    <p>سورة يس</p>
+</a>
+
+</li>

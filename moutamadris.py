@@ -26,6 +26,14 @@ grades_page_soup = BeautifulSoup(grades_page_html, 'lxml')
 grades_element_div = grades_page_soup.find('div','read')
 grades_element = grades_element_div.find_all('li', class_='medium-6 column') # pour eviter le telechargement des controles
 
+print("\n" + "="*50)
+print("Grades Element Structure:")
+print("="*50)
+for index, grade in enumerate(grades_element, start=1):
+    print(f"\n--- Grade {index} ---")
+    print(grade)
+    print("--- End of Grade ---")
+print("\n" + "="*50)
 print(f"Found {len(grades_element)} grades to process")
 
 # Process each grade
@@ -51,6 +59,16 @@ for grade_index, grade_element in enumerate(grades_element):
         grade_page_soup = BeautifulSoup(grade_page_html, 'lxml')
         subject_elements = grade_page_soup.find_all('li', 'mada')
         
+        print("\n" + "="*50)
+        print("Subjects Element Structure:")
+        print("="*50)
+        for index, subject in enumerate(subject_elements, start=1):
+            print(f"\n--- Subject {index} ---")
+            print(subject)
+            print("--- End of Subject ---")
+        print("\n" + "="*50)
+        print(f"Found {len(subject_elements)} subjects to process")
+
         if not subject_elements:
             print(f"❌ No subjects found for grade: {grade_name}, skipping...")
             continue
@@ -166,13 +184,15 @@ for grade_index, grade_element in enumerate(grades_element):
                     for container_index, content_container in enumerate(contents_containers):
                         print(f"📄 Processing content container {container_index + 1}/{len(contents_containers)}")
                         
+                        print(content_container)
+
                         content_link_element = content_container.find('a')
                         if not content_link_element:
                             print(f"❌ No content link found in this container, skipping...")
                             continue
                         
                         content_page_url = content_link_element['href']
-                        #print(f"🔗 Found content page URL: {content_page_url}")
+                        print(f"🔗 Found content page URL: {content_page_url}")
                     
                         try:
                             content_page_html = requests.get(content_page_url).text

@@ -3,7 +3,7 @@ import requests
 import time
 import os
 
-main_page_url = 'https://moutamadris.ma/%d8%a7%d9%84%d8%ab%d8%a7%d9%86%d9%8a-%d8%a7%d8%a8%d8%aa%d8%af%d8%a7%d8%a6%d9%8a/'
+main_page_url = 'https://moutamadris.ma/%D8%A7%D9%84%D8%AC%D8%B0%D8%B9-%D8%A7%D9%84%D9%85%D8%B4%D8%AA%D8%B1%D9%83/'
 main_page_html = requests.get(main_page_url).text
 main_page_soup = BeautifulSoup(main_page_html, 'lxml')
 subject_elements = main_page_soup.find_all('li', 'mada')
@@ -55,7 +55,14 @@ for subject_index, subject_element in enumerate(subject_elements):
                     continue
                     
                 for content_lesson in content_lessons:
-                    lesson_links = content_lesson.find_all('a')
+                    tbody = content_lesson.find('tbody')
+                    if tbody:
+                        table_info = tbody.find_all('tr')
+                    else:
+                        table_info = []                    
+                    print(table_info)
+                    
+                    lesson_links = .find_all('a')
                     if not lesson_links:
                         print(f"❌ No lesson links found, skipping this container...")
                         content_lessons_table = subject_page_soup.find_all('table', id = 'tableone')
