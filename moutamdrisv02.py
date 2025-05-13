@@ -50,31 +50,29 @@ def process_table_for_downloads(table, save_folder, file_counter):
         for row_index, row in enumerate(rows):
             cells = row.find_all('td')
             
-            # Skip rows with no cells or just one cell
-            if len(cells) < 1:
+            # Skip rows with insufficient cells
+            if len(cells) < 2:
                 continue
                 
-            # Process first cell in each row
-            if len(cells) >= 1:
-                url = extract_cell_link(cells[0])
-                if url:
-                    pdf_filename = os.path.join(save_folder, f"file_{file_counter}_first_cell.pdf")
-                    if download_file(url, pdf_filename):
-                        success_count += 1
-                    else:
-                        fail_count += 1
-                    file_counter += 1
+            # Process first cell
+            url = extract_cell_link(cells[0])
+            if url:
+                pdf_filename = os.path.join(save_folder, f"file_{file_counter}_first_cell.pdf")
+                if download_file(url, pdf_filename):
+                    success_count += 1
+                else:
+                    fail_count += 1
+                file_counter += 1
             
-            # Process second cell in each row if it exists
-            if len(cells) >= 2:
-                url = extract_cell_link(cells[1])
-                if url:
-                    pdf_filename = os.path.join(save_folder, f"file_{file_counter}_second_cell.pdf")
-                    if download_file(url, pdf_filename):
-                        success_count += 1
-                    else:
-                        fail_count += 1
-                    file_counter += 1
+            # Process second cell
+            url = extract_cell_link(cells[1])
+            if url:
+                pdf_filename = os.path.join(save_folder, f"file_{file_counter}_second_cell.pdf")
+                if download_file(url, pdf_filename):
+                    success_count += 1
+                else:
+                    fail_count += 1
+                file_counter += 1
     except Exception as e:
         print(f"❌ Error processing table rows: {e}")
     
@@ -116,7 +114,7 @@ for grade_index, grade_element in enumerate(grades_element):
         print(f"❌ No link found for this grade, skipping...")
         continue
         
-    grade_name = grade_link_element.text.strip()
+    grade_name = grade_link_element.text
     print(f"\n\n{'='*50}")
     print(f"Processing Grade {grade_index + 1}/{len(grades_element)}: {grade_name}")
     print(f"{'='*50}")
@@ -152,7 +150,7 @@ for grade_index, grade_element in enumerate(grades_element):
                     print(f"❌ No link found for this subject, skipping...")
                     continue
                     
-                subject_name = subject_link_element.text.strip()
+                subject_name = subject_link_element.text
                 print(f"Subject: {subject_name}")
                 
                 # Create a subject folder inside the grade folder
@@ -164,60 +162,54 @@ for grade_index, grade_element in enumerate(grades_element):
                     subject_page_html = requests.get(subject_page_url).text
                     subject_page_soup = BeautifulSoup(subject_page_html, 'lxml')
                                         
-                    # First try to process tables directly
-                    tables = subject_page_soup.find_all('table')
-                    if tables:
-                        print(f"Found {len(tables)} tables to process directly")
-                        for table_index, table in enumerate(tables):
-                            print(f"Processing table {table_index + 1}/{len(tables)}")
-                            success, fail, file_counter = process_table_for_downloads(table, subject_folder, file_counter)
-                            grade_success_count += success
-                            grade_fail_count += fail
-                    
+
                     # Find all elements with class "medium-8 column"
                     contents_containers = subject_page_soup.find_all('li', 'medium-8 column')
                     
-                    
-                    print(f"🔍 Found {len(contents_containers)} content containers")
-                    
-                    for container_index, content_container in enumerate(contents_containers):
-                        print(f"📄 Processing content container {container_index + 1}/{len(contents_containers)}")
+                    # First try to process tables directly
+                    if not contents_containers:
+                        print(f"⚠️ No content containers found, trying to process tables directly...")
+                        tables_success, tables_fail, file_counter = process_html_tables(subject_page_html, subject_folder, file_counter)
+                        grade_success_count += tables_success
+                        grade_fail_count += tables_fail
+                        continue
+                    elif contents_containers:
+                        print(f"🔍 Found {len(contents_containers)} content containers")
                         
-                        content_link_element = content_container.find('a')
-                        if not content_link_element:
-                            print(f"❌ No content link found in this container, skipping...")
-                            continue
+                        for container_index, content_container in enumerate(contents_containers):
+                            print(f"📄 Processing content container {container_index + 1}/{len(contents_containers)}")
                             
-                        content_page_url = content_link_element['href']
-                    
-                        try:
-                            content_page_html = requests.get(content_page_url).text
-                            content_page_soup = BeautifulSoup(content_page_html, 'lxml')
-                            
-                            # Check for "mawad" class in the content page
-                            mawad_element = content_page_soup.find(class_="mawad")
-                            if mawad_element:
-                                print(f"⚠️ This page doesn't have any lessons, skipping...")
-                                continue
-                            
-                            # Try to process tables in this content page
-                            tables = content_page_soup.find_all('table')
-                            if tables:  
-                                print(f"Found {len(tables)} tables in content page")
-                                for table in tables:
-                                    success, fail, file_counter = process_table_for_downloads(
-                                        table, subject_folder, file_counter
-                                    )
-                                    grade_success_count += success
-                                    grade_fail_count += fail
+                            content_link_element = content_container.find('a')
+                            if not content_link_element:
+                                print(f"❌ No content link found in this container, skipping...")
                                 continue
                                 
-                        except Exception as e:
-                            print(f"❌ Error processing content page: {e}, skipping...")
+                            content_page_url = content_link_element['href']
                         
-                        # Small delay between processing content containers
-                        time.sleep(0.5)
-                        
+                            try:
+                                content_page_html = requests.get(content_page_url).text
+                                content_page_soup = BeautifulSoup(content_page_html, 'lxml')
+                                
+                                # Check for "mawad" class in the content page
+                                mawad_element = content_page_soup.find(class_="mawad")
+                                if mawad_element:
+                                    print(f"⚠️ This page doesn't have any lessons, skipping...")
+                                    continue
+                                
+                                # Try to process tables in this content page
+                                tables_success, tables_fail, file_counter = process_html_tables(content_page_html, subject_folder, file_counter)
+                                
+                                grade_success_count += tables_success
+                                grade_fail_count += tables_fail
+
+                                continue
+                                    
+                            except Exception as e:
+                                print(f"❌ Error processing content page: {e}, skipping...")
+                            
+                            # Small delay between processing content containers
+                            time.sleep(0.5)
+                            
                 except Exception as e:
                     print(f"❌ Error accessing subject page: {e}, skipping...")
                     
